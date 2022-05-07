@@ -10,102 +10,65 @@ class Producto{
         this.stock= stock;
         
     }
-    //Método
-    precioFinal(){
+}
+
+//Declaro array
+    let productos= []
+    console.log(productos)
+//Agrego productos al array
+    productos.push(new Producto("bandolera",2000,30))
+    productos.push(new Producto("riñonera",1500,20))
+    productos.push(new Producto("bolsotote",3500,15))
+    productos.push(new Producto("tabaquera",1500,15))
+    productos.push(new Producto("billetera grande", 1000,10))
+    productos.push(new Producto("billetera chica", 900, 10))
+    
+    //Función
+    function mostrarProducto(seleccion){
+        return (productos[seleccion-1].nombre)
+    }
+    const mostrarPrecio= (seleccion) =>  productos[seleccion-1].precio
+    
         //variables locales
-        let cantidadProductos
-        let productoIngresado
+        let cantidadProductos;
+        let productoIngresado;
         let continua = true;
+
         //ciclo
         while (continua){
-            productoIngresado= parseInt(prompt("Ingrese producto que desea comprar: \n1 Bandolera \n2 Riñonera \n3 Bolsotote \n4 Tabaquera \n5 Billetera grande \n6 Billetera chica"));
+            productoIngresado = parseInt(prompt(`Ingrese producto que desea comprar: \n1 Bandolera \n2 Riñonera \n3 Bolsotote \n4 Tabaquera \n5 Billetera grande \n6 Billetera chica`));
+            
             //condicional
-            if(productoIngresado==1){
-                this.nombre= "Bandolera"
-                alert(this.nombre.toUpperCase())
+            if(productoIngresado>0 && productoIngresado<7){
                 continua = false;
-            }
-            else if (productoIngresado==2) {
-                this.nombre= "riñonera"
-                alert(this.nombre.toUpperCase())
-                continua = false;
-            }
-            else if (productoIngresado==3) {
-                this.nombre= "bolsotote"
-                alert(this.nombre.toUpperCase())
-                continua = false;
-            }
-            else if (productoIngresado==4) {
-                this.nombre= "tabaquera"
-                alert(this.nombre.toUpperCase())
-                continua = false;
-            } else if (productoIngresado==5) {
-                this.nombre= "billetera grande"
-                alert(this.nombre.toUpperCase())
-                continua = false;
-            } else if (productoIngresado==6) {
-                this.nombre= "billetera chica"
-                alert(this.nombre.toUpperCase())
-                continua = false;
-            }
-            else if (productoIngresado=="") {
-                alert("Ingrese un producto válido")
-                
-            }
-            else if (productoIngresado!=Number){
-                alert("Por favor ingrese una opción del 1 al 6");
-                
-            } else if (productoIngresado>6 || productoIngresado<1){
-                alert("Por favor ingrese una opción del 1 al 6");
-                
-            }
-            else{
-                alert("Por favor ingrese un producto válido");
-            }
+                let nombreSeleccionado= mostrarProducto(productoIngresado);
+                alert(`Producto seleccionado: ${nombreSeleccionado} `)
+            }else {
+                alert(`Por favor ingrese una opción válida entre 1 y ${productos.length}`)
+            }   
         }
-        let continua2=true;
-        while (continua2){
+        continua=true;
+        while (continua){
             cantidadProductos= parseInt(prompt ("Ingrese el número de unidades a comprar"))
             if(!(isNaN(cantidadProductos)) && !(cantidadProductos > 11)) {
             console.log(cantidadProductos)
-            continua2=false;
+            continua=false;
             } else {
                 alert("Por favor ingrese un número válido. Hasta 10 unidades");  
-                continua2=false;
+               
             }
             
         }
-
-        let total=this.precio*IVA*cantidadProductos;
+       
+        let total= mostrarPrecio(productoIngresado)*IVA*cantidadProductos;
         console.log(total)
         alert ("Monto a abonar = $ "+ total)
         
-    }  
-}
+    //Método de filtrado sobre array
+        const productoEconomico = productos.filter(productos =>productos.precio < 2000);
+        console.log(productoEconomico);
 
-//Agregado de productos
-const producto1 =new Producto("Bandolera",2000,30);
-const producto2=new Producto("Riñonera",1500,20);
-const producto3 =new Producto("Bolsotote",3500,15);
-const producto4 =new Producto("Tabaquera",1500,15);
-const producto5=new Producto ("Billetera Grande", 1000,10)
-const producto6=new Producto("Billetera Chica", 900, 10)
+        let buscarProducto = prompt("Ingrese producto a buscar");
+        const filtrar= productos.filter(productos =>productos.nombre == buscarProducto.toLowerCase());
+        console.log(filtrar);
 
-//Declaro array
-let productos= [producto1,producto2,producto3,producto4, producto5, producto6]
-
-//Método de búsqueda sobre array
-productos.forEach ((productoEnArray,indice)=>{
-    console.log(productoEnArray)
-    console.log(indice)
-})
-
-//Método de filtrado sobre array
-console.log(productos.filter(Producto =>Producto.precio < 2000));
-console.log(productos.filter(Producto =>Producto.nombre == "Bolsotote"));
-
-//llamar funciones
-producto1.precioFinal();
-producto2.precioFinal();
-producto3.precioFinal();
-producto4.precioFinal();
